@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ `ps -e | grep -c botTE.sh` -gt 2 ]; then echo "Already running, i'm killing old process, please run it again!"; killall -9 botTE.sh && exit 1; fi
+if [ `ps -e | grep -c bot.sh` -gt 2 ]; then echo "Already running, i'm killing old process, please run it again!"; killall -9 bot.sh && exit 1; fi
 usage() { echo -e "Usage: $0 [-t <Timer to restart chrome (seconds)>] [-l <Separate traffic exchange links with space delimiter(in quote)>]\nExample: $0 -t 3600 -l http://22hit...\nExample: $0 -t 3600 -l \"http://22hit... http://247webhit... http://...\"" 1>&2; exit 1; }
 [ $# -eq 0 ] && usage
 while getopts ":ht:l:" arg; do
