@@ -54,7 +54,7 @@ do
     for element in ${links[@]}
     do
         echo "Open link $element"
-        DISPLAY=:1.1 google-chrome --no-sandbox --disable-gpu --new-window --user-data-dir="/root/chromeBotTE" --disable-popup-blocking --incognito $element & disown
+        DISPLAY=:1.1 google-chrome --no-sandbox --new-window --user-data-dir="/root/chromeBotTE" --disable-popup-blocking --incognito $element & disown
     done
     sleep ${timer}
     echo "TELog: Restart TE bots"
