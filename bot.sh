@@ -40,6 +40,7 @@ echo "Killing old chrome and virtual X display..."
 pkill -9 -o chrome
 killall -9 chrome
 killall -9 Xvfb
+killall -9 sleep
 while :
 do
     echo "Recreating/extracting chrome user data dir..."
