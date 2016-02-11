@@ -54,7 +54,7 @@ do
     do
         echo "Open link ${links[$i]}"
         DISPLAY=:1.1 google-chrome --no-sandbox --new-window --user-data-dir="/root/chromeBotTE" --disable-popup-blocking --incognito ${links[$i]} & disown
-        ${chromePIDs[$i]}=$!
+        chromePIDs[$i]=$!
     done
     sleep ${timer}
     for element in ${chromePIDs[@]}
