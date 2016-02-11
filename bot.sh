@@ -36,26 +36,32 @@ then
 fi
 echo "Downloading chrome user data dir profile..."
 wget --no-check-certificate https://raw.githubusercontent.com/duclvz/botTE/master/chromeBotTE.tar.gz -O /root/chromeBotTE.tar.gz
+echo "Killing old chrome and virtual X display..."
+pkill -9 -o chrome
+killall -9 chrome
+killall -9 Xvfb
 while :
 do
-    echo "Killing chrome and virtual X display..."
-    for element in ${links[@]}
-    do
-        pkill -9 -o chrome
-    done
-    killall -9 chrome
-    killall -9 Xvfb
     echo "Recreating/extracting chrome user data dir..."
     rm -fr /root/chromeBotTE/
     tar -xf /root/chromeBotTE.tar.gz -C /root/
     echo "Starting virtual X display..."
     Xvfb :1 -screen 1 1024x768x16 -nolisten tcp & disown
     echo "Starting chrome TE viewer..."
-    for element in ${links[@]}
+    declare -a chromePIDs
+    for i in ${!links[@]}
     do
-        echo "Open link $element"
-        DISPLAY=:1.1 google-chrome --no-sandbox --new-window --user-data-dir="/root/chromeBotTE" --disable-popup-blocking --incognito $element & disown
+        echo "Open link ${links[$i]}"
+        DISPLAY=:1.1 google-chrome --no-sandbox --new-window --user-data-dir="/root/chromeBotTE" --disable-popup-blocking --incognito ${links[$i]} & disown
+        ${chromePIDs[$i]}=$!
     done
     sleep ${timer}
-    echo "TELog: Restart TE bots"
+    for element in ${chromePIDs[@]}
+    do
+        echo "Kill chrome PID $element"
+        kill $element
+    done
+    echo "Killing virtual X display..."
+    killall -9 Xvfb
+    echo "Restart TE bots after ${timer} seconds!!"
 done
