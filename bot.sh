@@ -24,7 +24,11 @@ apt-get update
 apt-get clean
 apt-get autoclean
 apt-get autoremove -y
-apt-get install -y psmisc xvfb gtk2-engines-pixbuf libexif12 libxpm4 libxrender1 libgtk2.0-0 libnss3 libgconf-2-4 x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable xfonts-cyrillic x11-apps chromium-browser
+apt-get install -y psmisc
+apt-get install -y xvfb x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable xfonts-cyrillic x11-apps
+apt-get install -y gtk2-engines-pixbuf libexif12 libxpm4 libxrender1 libgtk2.0-0
+apt-get install -y libnss3 libgconf-2-4
+apt-get install -y chromium-browser
 dpkg --configure -a
 apt-get install -f -y
 if [[ `lsb_release -rs` == "12.04" ]]
