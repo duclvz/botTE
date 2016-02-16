@@ -36,8 +36,6 @@ then
     apt-get install -y defoma x-ttcidfont-conf
     (cd /var/lib/defoma/x-ttcidfont-conf.d/dirs/TrueType && mkfontdir > fonts.dir)
 fi
-echo "Downloading chromium user data dir profile..."
-wget --no-check-certificate https://raw.githubusercontent.com/duclvz/botTE/master/chromiumBotTE.tar.gz -O /root/chromiumBotTE.tar.gz
 echo "Killing old chromium and virtual X display..."
 pkill -9 -o chrome
 pkill -9 -o chromium-browser
@@ -49,6 +47,8 @@ killall -9 Xvfb
 killall -9 sleep
 while :
 do
+    echo "Downloading chromium user data dir profile..."
+    wget --no-check-certificate https://raw.githubusercontent.com/duclvz/botTE/master/chromiumBotTE.tar.gz -O /root/chromiumBotTE.tar.gz
     echo "Recreating/extracting chromium user data dir..."
     rm -fr /root/chromeBotTE/
     tar -xf /root/chromiumBotTE.tar.gz -C /root/
